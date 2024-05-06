@@ -1,0 +1,5 @@
+for tilemap and road creation:
+divide screen into tiles by adding a variable position at an evenly spaced point each around the screen.
+ass the player moves through the map the tiles dynamically shift down and to the left or right and the ones that go out
+of screen are deleted while the new tiles with nothing on them are picked from a selection of tiles until the finish.
+the tiles an simply be stored in an array as coordinates and the car is continuously checked to which tile it is closest to to determine how the tiles need to move.
