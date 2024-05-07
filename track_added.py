@@ -12,8 +12,8 @@ class Car:
         self.length = length
         self.max_acceleration = max_acceleration
         self.max_steering = max_steering
-        self.max_velocity = 20
-        self.brake_deceleration = 10
+        self.max_velocity = 30
+        self.brake_deceleration = 30
         self.free_deceleration = 2
 
         self.acceleration = 0.0
@@ -36,7 +36,7 @@ class Car:
 class Game:
     def __init__(self):
         pygame.init()
-        pygame.display.set_caption("Car tutorial")
+        pygame.display.set_caption("Car Driving")
         width = 1280
         height = 720
         self.screen = pygame.display.set_mode((width, height))
@@ -47,8 +47,11 @@ class Game:
     def run(self):
         current_dir = os.path.dirname(os.path.abspath(__file__))
         image_path = os.path.join(current_dir, "car.png")
+        track_path = os.path.join(current_dir, "track.png")
         car_image = pygame.image.load(image_path)
+        track_image = pygame.image.load(track_path)
         car = Car(0, 0)
+
         ppu = 32
 
         while not self.exit:
@@ -96,13 +99,17 @@ class Game:
             # Logic
             car.update(dt)
 
+            track_x = (self.screen.get_width() - track_image.get_width()) / 2
+            track_y = (self.screen.get_height() - track_image.get_height()) / 2
+
             # Drawing
             self.screen.fill((0, 0, 0))
+            self.screen.blit(track_image, (track_x, track_y))
             rotated = pygame.transform.rotate(car_image, car.angle)
             rect = rotated.get_rect()
             self.screen.blit(rotated, car.position * ppu - (rect.width / 2, rect.height / 2))
             pygame.display.flip()
-
+            pygame.transform.scale()
             self.clock.tick(self.ticks)
         pygame.quit()
 
