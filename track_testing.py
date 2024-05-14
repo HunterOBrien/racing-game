@@ -44,14 +44,16 @@ class Game:
         self.ticks = 60
         self.exit = False
 
+        # New: Initialize vertical track offset
+        self.track_offset_y = 0
+
     def run(self):
         current_dir = os.path.dirname(os.path.abspath(__file__))
         image_path = os.path.join(current_dir, "car.png")
         track_path = os.path.join(current_dir, "track.png")
+        track_path_02 = os.path.join(current_dir, "Track_02.png")
         car_image = pygame.image.load(image_path)
-        original_track_image = pygame.image.load(track_path)
-        scaled_track_image = pygame.transform.scale(original_track_image, (
-            original_track_image.get_width() * 4, original_track_image.get_height() * 4))
+        original_track_image = pygame.image.load(track_path_02)
         car = Car(0, 0)
 
         ppu = 32
@@ -101,17 +103,27 @@ class Game:
             # Logic
             car.update(dt)
 
-            track_x = (self.screen.get_width() - scaled_track_image.get_width()) / 2
-            track_y = (self.screen.get_height() - scaled_track_image.get_height()) / 2
+            # Update the vertical track offset (move downwards)
+            self.track_offset_y += 1
+
+            track_x = (self.screen.get_width() - original_track_image.get_width()) / 2
+            track_y = (self.screen.get_height() - original_track_image.get_height()) / 2
+
+            if self.track_offset_y > self.screen.get_height():
+                self.track_offset_y = 0
 
             # Drawing
             self.screen.fill((0, 0, 0))
-            self.screen.blit(scaled_track_image, (track_x, track_y))
+            # using two instances off track tile one offset upwards by the tile size so there is constantly track
+            # on screen at all times
+            self.screen.blit(original_track_image, (track_x, -720 + self.track_offset_y))
+            self.screen.blit(original_track_image, (track_x, track_y + self.track_offset_y))
             rotated = pygame.transform.rotate(car_image, car.angle)
             rect = rotated.get_rect()
             self.screen.blit(rotated, car.position * ppu - (rect.width / 2, rect.height / 2))
             pygame.display.flip()
             self.clock.tick(self.ticks)
+
         pygame.quit()
 
 
