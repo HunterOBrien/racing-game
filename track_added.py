@@ -51,7 +51,7 @@ class Game:
         car_image = pygame.image.load(image_path)
         original_track_image = pygame.image.load(track_path)
         scaled_track_image = pygame.transform.scale(original_track_image, (
-            original_track_image.get_width() * 4, original_track_image.get_height() * 4))
+            original_track_image.get_width() * 2, original_track_image.get_height() * 2))
         car = Car(0, 0)
 
         ppu = 32
