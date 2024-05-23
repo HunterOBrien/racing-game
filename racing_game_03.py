@@ -1,10 +1,8 @@
 import os
 import pygame
-import tkinter
+import tkinter as tk
 from math import sin, radians, degrees, copysign
 from pygame.math import Vector2
-
-
 
 
 class Car:
@@ -130,7 +128,24 @@ class Game:
         pygame.quit()
 
 
+class MainMenu:
+    def __init__(self):
+        self.root = tk.Tk()
+        self.root.title("Game Start")
+        self.root.geometry("1280x720")
+
+        self.label = tk.Label(self.root, text="Main Menu", font=("Helvetica", 24))
+        self.label.pack(pady=50)
+
+        self.root.bind("<Escape>", self.exit_menu)
+
+    def exit_menu(self, event):
+        self.root.destroy()
+
+    def run(self):
+        self.root.mainloop()
+
 
 if __name__ == '__main__':
-    game = Game()
-    game.run()
+    game_start = MainMenu()
+    game_start.run()
