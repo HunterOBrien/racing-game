@@ -1,4 +1,5 @@
 import os
+import time
 import pygame
 import tkinter as tk
 from math import sin, radians, degrees, copysign
@@ -134,10 +135,21 @@ class MainMenu:
         self.root.title("Game Start")
         self.root.geometry("1280x720")
 
+        # Label
         self.label = tk.Label(self.root, text="Main Menu", font=("Helvetica", 24))
         self.label.pack(pady=50)
 
+        # Start Button
+        self.start_button = tk.Button(self.root, text="Start Game", command=self.run_game)
+        self.start_button.pack()
+
         self.root.bind("<Escape>", self.exit_menu)
+
+    def run_game(self):
+        # Closes menu and opens game
+        self.root.destroy()
+        game = Game()
+        game.run()
 
     def exit_menu(self, event):
         self.root.destroy()
