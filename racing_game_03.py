@@ -49,6 +49,10 @@ class Game:
         # New: Initialize vertical track offset
         self.track_offset_y = 0
 
+        car_x = self.screen.get_width() / 2
+        car_y = self.screen.get_height() / 2
+        car = Car(car_x, car_y)
+
     def run(self):
         current_dir = os.path.dirname(os.path.abspath(__file__))
         image_path = os.path.join(current_dir, "car.png")
