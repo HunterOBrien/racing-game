@@ -7,16 +7,16 @@ from pygame.math import Vector2
 
 
 class Car:
-    def __init__(self, x, y, angle=0.0, length=4, max_steering=30, max_acceleration=5.0):
+    def __init__(self, x, y, angle=0.0, length=4, max_steering=30, max_acceleration=20.0):
         self.position = Vector2(x, y)
         self.velocity = Vector2(0.0, 0.0)
         self.angle = angle
         self.length = length
         self.max_acceleration = max_acceleration
         self.max_steering = max_steering
-        self.max_velocity = 30
-        self.brake_deceleration = 30
-        self.free_deceleration = 2
+        self.max_velocity = 15
+        self.brake_deceleration = 100
+        self.free_deceleration = 1
 
         self.acceleration = 0.0
         self.steering = 0.0
