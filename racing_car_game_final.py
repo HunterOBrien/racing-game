@@ -71,7 +71,9 @@ class CarRacing:
         # enemy_car (has speed moves toward player)
         self.enemy_car_images = [
             pygame.image.load(self.root_path + "/img/enemy_car_1.png"),
-            pygame.image.load(self.root_path + "/img/enemy_car_2.png")
+            pygame.image.load(self.root_path + "/img/enemy_car_2.png"),
+            pygame.image.load(self.root_path + "/img/enemy_car_3.png"),
+            pygame.image.load(self.root_path + "/img/enemy_car_4.png")
         ]
         self.enemy_car = random.choice(self.enemy_car_images)
         self.enemy_car_startx = random.randrange(310, 450)
