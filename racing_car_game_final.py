@@ -18,6 +18,7 @@ from pathlib2 import Path
 
 
 class CarRacing:
+
     def __init__(self):
         pygame.init()
         # Create Display Window
@@ -31,6 +32,26 @@ class CarRacing:
         pygame.display.set_caption("Car Racing Game")
         # root file path for loading images
         self.root_path = str(Path(__file__).parent)
+
+        # Define all instance attributes
+        self.crashed = False
+        self.carImg = None
+        self.car_x_coordinate = 0
+        self.car_y_coordinate = 0
+        self.car_width = 0
+        self.enemy_car = None
+        self.enemy_car_startx = 0
+        self.enemy_car_starty = 0
+        self.enemy_car_speed = 0
+        self.enemy_car_width = 0
+        self.enemy_car_height = 0
+        self.bgImg = None
+        self.bg_x1 = 0
+        self.bg_x2 = 0
+        self.bg_y1 = 0
+        self.bg_y2 = 0
+        self.bg_speed = 0
+        self.count = 0
 
         self.initialize()
 
@@ -119,7 +140,8 @@ class CarRacing:
 
             if self.car_y_coordinate < self.enemy_car_starty + self.enemy_car_height:
                 if self.enemy_car_startx < self.car_x_coordinate < self.enemy_car_startx + self.enemy_car_width \
-                        or self.enemy_car_startx < self.car_x_coordinate + self.car_width < self.enemy_car_startx + self.enemy_car_width:
+                        or self.enemy_car_startx < self.car_x_coordinate + self.car_width < self.enemy_car_startx + \
+                        self.enemy_car_width:
                     self.crashed = True
                     self.display_message("Game Over !!!")
 
@@ -159,19 +181,14 @@ class CarRacing:
             self.bg_y2 = -600
 
     def highscore(self, count):
-        # Convert count to string
-        score_str = str(count)
-
         # Read highscore from the text file
         try:
             with open("highscore.txt", "r") as file:
                 highscore_str = file.read()
-        except FileNotFoundError:
-            # If highscore file doesn't exist, set highscore to 0
-            highscore_str = "0"
-
-        # Convert highscore to integer
-        highscore = int(highscore_str)
+                highscore = int(highscore_str)  # Try to convert to integer
+        except (FileNotFoundError, ValueError):
+            # If file doesn't exist or contains invalid data, set highscore to 0
+            highscore = 0
 
         # Update highscore if current score is higher
         if count > highscore:
