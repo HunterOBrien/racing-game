@@ -14,7 +14,7 @@ Racing game v9
 import random
 import pygame
 from time import sleep
-from pathlib2 import Path
+from pathlib import Path
 
 
 class CarRacing:
@@ -33,12 +33,13 @@ class CarRacing:
         # root file path for loading images
         self.root_path = str(Path(__file__).parent)
 
-        # Define all instance attributes
+        # Declares all variables to avoid errors
         self.crashed = False
         self.carImg = None
         self.car_x_coordinate = 0
         self.car_y_coordinate = 0
         self.car_width = 0
+        self.enemy_car_images = []
         self.enemy_car = None
         self.enemy_car_startx = 0
         self.enemy_car_starty = 0
@@ -68,7 +69,11 @@ class CarRacing:
         self.car_width = 49
 
         # enemy_car (has speed moves toward player)
-        self.enemy_car = pygame.image.load(self.root_path + "/img/enemy_car_1.png")
+        self.enemy_car_images = [
+            pygame.image.load(self.root_path + "/img/enemy_car_1.png"),
+            pygame.image.load(self.root_path + "/img/enemy_car_2.png")
+        ]
+        self.enemy_car = random.choice(self.enemy_car_images)
         self.enemy_car_startx = random.randrange(310, 450)
         self.enemy_car_starty = -600
         self.enemy_car_speed = 5
@@ -122,9 +127,8 @@ class CarRacing:
 
             if self.enemy_car_starty > self.display_height:
                 self.enemy_car_starty = 0 - self.enemy_car_height
-
-                # random spawn location
                 self.enemy_car_startx = random.randrange(310, 450)
+                self.enemy_car = random.choice(self.enemy_car_images)
                 self.count += 1
 
             # spawns enemy car within rand range
@@ -163,8 +167,8 @@ class CarRacing:
         pygame.display.update()
         self.clock.tick(60)
         sleep(1)
-        car_racing.initialize()
-        car_racing.racing_window()
+        self.initialize()
+        self.racing_window()
 
     def back_ground_road(self):
         # moved into function

@@ -115,6 +115,7 @@ class CarRacing:
             # increases speed overtime
             if self.count % 100 == 0:
                 self.enemy_car_speed = random.randint(3, 10)
+                print(self.enemy_car_speed)
                 # self.bg_speed += 1
 
             if self.car_y_coordinate < self.enemy_car_starty + self.enemy_car_height:
