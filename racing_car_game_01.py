@@ -1,6 +1,6 @@
 """
 Racing game v1
-Creates Window
+ v1 Creates Window (not working yet)
 """
 
 import random
