@@ -49,8 +49,8 @@ class Game:
         # New: Initialize vertical track offset
         self.track_offset_y = 0
 
-        car_x = self.screen.get_width() / 2
-        car_y = self.screen.get_height() / 2
+        car_x = 1280 / 2
+        car_y = 720 / 2
         car = Car(car_x, car_y)
 
     def run(self):
