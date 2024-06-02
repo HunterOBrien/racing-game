@@ -1,6 +1,7 @@
 """
 Racing game v2
 Creates Window
+Adds class for variables for later
 """
 
 import random
@@ -26,3 +27,10 @@ class CarRacing:
         self.root_path = str(Path(__file__).parent)
 
         self.initialize()
+
+    def initialize(self):
+
+        # used to restart game if crashed
+        self.crashed = False
+
+        self.carImg = pygame.image.load(self.root_path + "/img/car.png")
