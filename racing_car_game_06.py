@@ -59,7 +59,6 @@ class CarRacing:
         self.bg_y2 = -600
         # speed background moves
         self.bg_speed = 3
-        # count of background tiles
         self.count = 0
 
     # clearer variable names than v3
