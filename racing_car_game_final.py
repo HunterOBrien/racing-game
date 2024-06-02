@@ -72,7 +72,6 @@ class CarRacing:
     # function to run game
     def racing_window(self):
         self.gameDisplay = pygame.display.set_mode((self.display_width, self.display_height))
-        pygame.display.set_caption('Car Race')
         self.run()
 
     def run(self):
